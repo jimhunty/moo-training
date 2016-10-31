@@ -1,6 +1,8 @@
-Exercise
-========
+MOO ES2015 and React Training
+-----------------------------
 
-Take the ES5.html page and turn it into ES6 using what you have learnt in the presentation.
+The purpose of this repo is to provide some basic understanding and some practical experience with ES2015 and React. This training was perform w/c 31/10/2016.
 
-The presentation is available here http://turnbullm.github.io/js-2015-preso/#/intro
+[ES2015 Training](es2015/README.md)
+
+[React Training](react-training/README.md)
