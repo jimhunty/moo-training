@@ -1,0 +1,364 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>React Training</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section>
+					<h1>React - Basic Training</h1>
+				</section>
+
+				<section>
+					<h2>What is React?</h2>
+					<ul>
+						<li class="fragment">React is a declarative, efficient, and flexible JavaScript library for building user interfaces.</li>
+						<li class="fragment">Built by Facebook and open source</li>
+						<li class="fragment">Reusable UI Components</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>How does it work?</h2>
+					<ul>
+						<li class="fragment">Single entry point - server side and client side</li>
+						<li class="fragment">Virtual DOM</li>
+						<li class="fragment">Inline Templating</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>React Features</h2>
+					<ul>
+						<li class="fragment"><strong>JSX</strong> − JSX is JavaScript syntax extension. It isn't necessary to use JSX in React development, but it is recommended.</li>
+						<li class="fragment"><strong>Components</strong> − React is all about components. You need to think of everything as a component. This will help you to maintain the code when working on larger scale projects.</li>
+						<li class="fragment"><strong>Unidirectional data flow</strong> − React implements one way data flow which makes it easy to reason about your app.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Thinking in Components</h2>
+					<img src="https://facebook.github.io/react/img/blog/thinking-in-react-components.png" />
+					<aside class="notes">
+						<ul>
+							<li>Single responsibility principle</li>
+							<li>Heirarchy</li>
+							<li>DRY</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Component Anatomy</h2>
+					<pre>
+						<code>
+	// Cart.js
+	import React, { Component } from 'react';
+
+	class Cart extends Component {
+	  render() {
+	    return (
+	      <div className='cart'>
+	        <h2>Cart goes here</h2>
+	      </div>
+	    );
+	  }
+	}
+
+	export default Cart;
+					</code>
+					</pre>
+					<aside class="notes">
+			      <ul>
+							<li>Wrapper element required</li>
+						</ul>
+			    </aside>
+				</section>
+
+				<section>
+					<pre>
+						<code class="javascript" style="max-height:500px">
+	// App.js
+	import React, { Component } from 'react';
+	import Cart from './Cart';
+
+	class App extends Component {
+	  render() {
+			const randomString = 'Hi everyone!';
+	    return (
+	      <div className='app'>
+	        &lt;Cart /&gt;
+					{randomString}
+	      </div>
+	    );
+	  }
+	}
+
+	export default App;
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Entry Point</h2>
+					<pre>
+						<code class="javascript">
+	// index.js
+	import React from 'react';
+	import ReactDOM from 'react-dom';
+	import App from './App';
+
+	ReactDOM.render(
+	  &lt;App /&gt;,
+	  document.getElementById('root')
+	);
+
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<pre>
+						<code>
+	&lt;!DOCTYPE html&gt;
+	&lt;html lang="en"&gt;
+	&lt;head&gt;
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>React app</title>
+	&lt;/head&gt;
+	&lt;body&gt;
+		<div id="root"></div>
+		<script src='index.js'></script>
+	&lt;/body&gt;
+	&lt;/html&gt;
+					</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Props</h2>
+					<pre>
+						<code>
+	// App.js
+	...
+	&lt;Cart isShown contents={['product 1', 'product 2', 'product 3']} /&gt;
+
+	// Cart.js
+	...
+	render(){
+	const showCart = this.props.isShown ? 'cart--show' : 'cart--hide';
+		return (
+			<div class="cart {showCart}">
+				{this.props.contents}
+			</div>
+		);
+	}
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>Passing data down through the heirarchy</li>
+					</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>State</h2>
+					<pre>
+						<code class="javascript" style="max-height:600px">
+	class App extends Component {
+		constructor() {
+			super();
+			this.state = {
+				appTitle: "James' Amazing Application"
+			};
+		}
+
+		render() {
+			return(
+				<div>
+					<h1>{this.state.appTitle}</h1>
+				</div>
+			);
+		}
+	}
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>Super always required when defining a constructor</li>
+							<li>State must be set in the contructor</li>
+							<li>State lasts for lifecycle of the application. Think of it like local storage</li>
+							<li>Cant pass state around like props, scoped to just that component</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Mutating state</h2>
+					<pre>
+						<code class="javascript8" style="max-height: 600px">
+	// App.js
+	class App extends Component {
+		constructor() {
+			...
+			let changeTitle = this.changeTitle.bind(this);
+		}
+
+		changeTitle() {
+			const newTitle = "Dave's amazing app";
+			this.setState({ appTitle: newTitle });
+		}
+
+		render() {
+			...
+			<button onClick={this.changeTitle}>CHANGE TITLE</button>
+		}
+	}
+
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Lifecycle Methods</h2>
+					<ul>
+						<li class="fragment">componentWillMount</li>
+						<li class="fragment">componentDidMount</li>
+						<li class="fragment">componentWillReceiveProps</li>
+						<li class="fragment">shouldComponentUpdate</li>
+						<li class="fragment">componentWillUpdate</li>
+						<li class="fragment">componentDidUpdate</li>
+						<li class="fragment">componentWillUnmount</li>
+					</ul>
+					<p class="fragment"><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank">More info here</a></p>
+				</section>
+
+				<section>
+					<h2>Example</h2>
+					<pre>
+						<code class="javascript">
+	class Cart extends Component {
+		constructor() {
+			super();
+			let loading = true;
+		}
+
+		componentDidMount() {
+			this.loading = false;
+		}
+
+		...
+	}
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Events</h2>
+					<ul>
+						<li class="fragment">onClick</li>
+						<li class="fragment">onFocus</li>
+						<li class="fragment">onBlur</li>
+						<li class="fragment">many more...</li>
+					</ul>
+					<p class="fragment"><a href="https://facebook.github.io/react/docs/events.html#supported-events" target="_blank">More info here</a></p>
+					<aside class="notes">
+						<ul>
+							<li>Synthetic events - cross browser wrapper</li>
+							<li>Events are pooled so they are reused for performance reasons</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Example</h2>
+					<pre>
+						<code style="max-height:600px">
+	class Button extends Component {
+		constructor() {
+			super();
+			this.click = this.click.bind(this);
+		}
+
+		click() {
+			// Perform an action when clicked
+		}
+
+		render() {
+			return(
+				<div className="fakeButton" onClick={this.click}>
+					Im trying to be a button
+				</div>
+			);
+		}
+	}
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Bonus slide: NPM</h2>
+					<ul>
+						<li class="fragment">Package manager for Node</li>
+						<li class="fragment">Reduce the potential to "reinvent the wheel"</li>
+						<li class="fragment">npm install ...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Questions?</h2>
+				</section>
+
+				<section>
+					<h2>EXERCISE!</h2>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() {
+						hljs.configure({
+							tabReplace: '  '
+						})
+						hljs.initHighlightingOnLoad();
+					} }
+				]
+			});
+		</script>
+	</body>
+</html>
