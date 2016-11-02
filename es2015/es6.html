@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ES6 Demo</title>
+</head>
+<body>
+
+  <h1>Cart</h1>
+
+  <table border="1">
+    <thead>
+      <th>Product</th>
+      <th>Type</th>
+      <th>Price</th>
+    </thead>
+    <tbody id="cart">
+
+    </tbody>
+  </table>
+
+  <script type="text/javascript">
+    // All this functionality is currently supported in Chrome.
+    
+    const productTypes = ['Business Cards', 'Leterheads', 'Stickers', 'Accessories'];
+
+    const cart = [{
+      product: "James' Awesome Business Card",
+      price: 1245,
+      productType: productTypes[0]
+    },
+    {
+      product: "Henry Letterheads Inc.",
+      price: 5678,
+      productType: productTypes[1]
+    },
+    {
+      product: "Alex Likes Stickers",
+      price: 9102,
+      productType: productTypes[2]
+    }];
+
+    class Utils {
+      rowCreator(item){
+        const newPrice = '£' + item.price/100;
+        const html = `
+        <tr>
+          <td>${item.product}</td>
+          <td>${item.productType}</td>
+          <td>${newPrice}</td>
+        </tr>`;
+        return html;
+      }
+    }
+
+    const cartContainer = document.getElementById('cart');
+    let cartHtml = '';
+    let utilities = new Utils();
+
+    cart.map((item) => {
+      cartHtml += utilities.rowCreator(item);
+    })
+
+    cartContainer.innerHTML = cartHtml;
+
+  </script>
+</body>
+</html>

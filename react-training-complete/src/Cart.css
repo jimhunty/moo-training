@@ -1,0 +1,20 @@
+.Cart {
+  margin:1em auto;
+  width: 600px;
+}
+
+.Cart td {
+  padding: 5px;
+  text-align: left;
+}
+
+.Cart__time {
+  padding: 20px;
+  font-weight: bold;
+}
+
+.Cart__addToCart {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
